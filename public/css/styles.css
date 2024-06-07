@@ -47,9 +47,9 @@ nav{
     display: flex;
     padding: 8px 0 8px 0;
     justify-content: space-evenly;
-    color: white;
     a{
       text-decoration: none;
+      color: white;
     }
   }
 }
