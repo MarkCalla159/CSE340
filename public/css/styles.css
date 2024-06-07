@@ -13,7 +13,15 @@
   font-weight: normal;
   font-style: normal;
 }
-
+@font-face {
+  font-family: 'Good-Times';
+  src:url('/webfonts_Good-Times/Good-Times.ttf.woff') format('woff'),
+      url('/webfonts_Good-Times/Good-Times.ttf.svg#Good-Times') format('svg'),
+      url('/webfonts_Good-Times/Good-Times.ttf.eot'),
+      url('/webfonts_Good-Times/Good-Times.ttf.eot?#iefix') format('embedded-opentype'); 
+  font-weight: normal;
+  font-style: normal;
+}
 header{
   padding-top: 0.8rem;
   .siteName{
@@ -45,7 +53,6 @@ nav{
     list-style: none;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
-    padding: 8px 0 8px 0;
     justify-content: space-evenly;
     a{
       text-decoration: none;
@@ -67,6 +74,56 @@ h2{
 h3{
   font-family: 'Dodger';
   color: #c66717;
+}
+
+/*Classification*/
+#inv-display{
+  list-style: none;
+  display: grid;
+  padding-inline-start: 0;
+  grid-template-columns: repeat(auto-fill, minmax( 20rem, 1fr));
+  grid-gap: 1.5rem;
+  margin: 0 1rem 0 1rem;
+  a{
+    text-decoration: none;
+  }
+  li{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #3f676b;
+    border: 0.25rem solid #c66717;
+    justify-content: space-between;
+    text-align: center;
+    padding: 0.625rem;
+    
+    img{
+      width: 256.1px;
+      height: 150px;
+      display: flex;
+      overflow: hidden;
+    }
+  }
+  .namePrice{
+    margin: 1rem;
+    hr{
+      width: 22.563rem;
+      border-width: 0.1rem;
+      border-color: #c66717;
+    }
+    h2{
+      font-family: 'Good-Times';
+      font-style: normal;
+      font-size: 1em;
+      margin-top: 1.5em;
+      a{
+        color: #F8F9FA;
+      }
+    }
+    span{
+      color: #F8F9FA;
+    }
+  }
 }
 .deloreanCont{
   margin-left: 0.2rem;
@@ -108,7 +165,6 @@ h3{
       align-items: center;
       background-color: #51949480;
       text-align: center;
-      gap: 15px;
       a{
         text-decoration: none;
         color: #19323b;
@@ -135,6 +191,10 @@ footer{
     width: 80%;
     margin: 0 auto; 
     background-color: white;
+    border-color: #19323b;
+  }
+  nav{
+    padding: 8px 0 8px 0;
   }
   .deloreanCont{
     display: flex;
@@ -181,6 +241,11 @@ footer{
   nav{
     position: relative;
     top: 1rem;
+    padding: 2px 0 2px 0;
+    ul{
+      width: 100%;  
+      padding-inline-start: 0px;
+    }
   }
   .deloreanCont{
     img{
