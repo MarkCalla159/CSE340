@@ -27,10 +27,14 @@ invCont.buildByDetailId = async function (req, res, next) {
   const grid = await utilities.buildVehicleDet(data)
   let nav = await utilities.getNav()
   const vehicleInfo = data[0].inv_year + " " + data[0].inv_make + " " + data[0].inv_model
-  res.render("./inventory/views", {
-    title: vehicleInfo,
-    nav,
-    grid,
-  })
+  try {
+    res.render("./inventory/views", {
+      title: vehicleInfo,
+      nav,
+      grid,
+  });
+  } catch(error){
+     console.error(/*My brain is broken*/)
+  }
 }
 module.exports = invCont
