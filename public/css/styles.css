@@ -22,44 +22,44 @@
   font-weight: normal;
   font-style: normal;
 }
+/*Header*/
 header{
   padding-top: 0.8rem;
-  .siteName{
-    font-family: 'Dodger';
-    font-size: 1.8rem;
-    a{
-      color: #c66717;
-      margin-left: 1.5rem;
-    }
-  }
-  #tools{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    float: right;
-    font-size: 1.1rem;
-    padding: 0rem 1rem 0rem 0rem;
-    a{
-      color: #19323b;
-    }
-  }
-  .siteName, #tools{
-    a{
-      text-decoration: none;
-    }
-  }
 }
+header .siteName{
+  font-family: 'Dodger';
+  font-size: 1.8rem;
+}
+.siteName a{
+  color: #c66717;
+  margin-left: 1.5rem;
+  text-decoration: none;
+}
+#tools a{
+  text-decoration: none;
+  color: #19323b;
+}
+header #tools{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  float: right;
+  font-size: 1.1rem;
+  padding: 0rem 1rem 0rem 0rem;
+}
+/*Navigation*/
 nav{
   background-color: #333437;
-  ul{
-    list-style: none;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    display: flex;
-    justify-content: space-evenly;
-    a{
-      text-decoration: none;
-      color: white;
-    }
-  }
 }
+nav ul{
+  list-style: none;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: space-evenly;
+}
+nav ul a{
+  text-decoration: none;
+  color: white;
+}
+/*H's*/
 h1{
   font-family: 'Dodger';
   font-size: 1.5rem;
@@ -84,94 +84,117 @@ h3{
   grid-template-columns: repeat(auto-fill, minmax( 20rem, 1fr));
   grid-gap: 1.5rem;
   margin: 0 1rem 0 1rem;
-  a{
-    text-decoration: none;
-  }
-  li{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #3f676b;
-    border: 0.25rem solid #c66717;
-    justify-content: space-between;
-    text-align: center;
-    padding: 0.625rem;
-    
-    img{
-      width: 256.1px;
-      height: 150px;
-      display: flex;
-      overflow: hidden;
-    }
-  }
-  .namePrice{
-    margin: 1rem;
-    hr{
-      width: 22.563rem;
-      border-width: 0.1rem;
-      border-color: #c66717;
-    }
-    h2{
-      font-family: 'Good-Times';
-      font-style: normal;
-      font-size: 1em;
-      margin-top: 1.5em;
-      a{
-        color: #F8F9FA;
-      }
-    }
-    span{
-      color: #F8F9FA;
-    }
-  }
+}
+#inv-display a{
+  text-decoration: none;
+}
+#inv-display li{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #3f676b;
+  border-radius: 2rem;
+  border: 0.25rem solid #c66717;
+  justify-content: space-between;
+  text-align: center;
+  padding: 0.625rem;
+}
+#inv-display li img{
+  width: 256.1px;
+  height: 150px;
+  display: flex;
+  overflow: hidden;
+}
+#inv-display .namePrice {
+  margin: 1rem;
+}
+#inv-display .namePrice hr{
+  width: 22.563rem;
+  border-width: 0.1rem;
+  border-color: #c66717;
+}
+#inv-display .namePrice h2{
+  font-family: 'Good-Times';
+  font-style: normal;
+  font-size: 1em;
+  margin-top: 1.5em;
+}
+#inv-display .namePrice h2 a{
+  color: #F8F9FA;
+}
+#inv-display .namePrice span{
+  color: #F8F9FA;
+}
+/*Detail View*/
+.vehicleDetail{
+  display: flex;
+  flex-direction: column;
+  margin: 0 2rem 0 2rem;
+  gap: 1rem;
+}
+.vehicleDetail img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.vehicleDetail .back{
+  background-color: #F8F9FA;
+}
+.vehicleDetail p{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  padding: 0.6rem;
+}
+.vehicleDetail h2{
+  position: relative;
+  float:right;
+}
+.vehicleDetail .detailsInfo{
+  display: flex;
+  flex-direction: column;
 }
 .deloreanCont{
   margin-left: 0.2rem;
-  .charact{
-    /*background-color: #3f676b;*/
-    background-color: #51949480;
-    border-radius: 1em;
-    padding: 1.3rem;
-    p{
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      font-weight: 800;
-      color: #333437;
-      margin-left: 4%;
-    }
-  }
-  #ownbtt{
-    background:    #3f676b;
-    background:    linear-gradient(#3f676b, #19323b);
-    border-radius: 0.1rem;
-    padding:       0.5rem 1rem;
-    color:         #ffffff;
-    font:          normal bold 1.3rem/1 "Segoe ui";
-    text-align:    center;
-  }
+}
+.deloreanCont #ownbtt{
+  background:    #3f676b;
+  background:    linear-gradient(#3f676b, #19323b);
+  border-radius: 0.1rem;
+  padding:       0.5rem 1rem;
+  color:         #ffffff;
+  font:          normal bold 1.3rem/1 "Segoe ui";
+  text-align:    center;
+}
+.deloreanCont .charact {
+  /*background-color: #3f676b;*/
+  background-color: #51949480;
+  border-radius: 1em;
+  padding: 1.3rem;
+}
+.deloreanCont .charact p{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 800;
+  color: #333437;
+  margin-left: 4%;
 }
 .delor-container{
   margin-left: 0.7rem;
   padding: 1rem;
-  .delor-review{
-    ul{
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #19323b;
-    }
-  }
-  .delor-upg{ 
-    div{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-color: #51949480;
-      text-align: center;
-      a{
-        text-decoration: none;
-        color: #19323b;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      }
-    }
-  }
+}
+.delor-container .delor-review ul{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #19323b;
+}
+.delor-container .delor-upg div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #51949480;
+  text-align: center;
+}
+.delor-container .delor-upg div a{
+  text-decoration: none;
+  color: #19323b;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 footer{
   display: flex;
@@ -179,7 +202,7 @@ footer{
   font-family: 'Dodger';
   background-color:#3f676b;
   color: #F8F9FA;
-  margin-top: 5rem;
+  margin-top: 3.2rem;
 }
 
 /****LargeScreen****/
@@ -199,11 +222,11 @@ footer{
   .deloreanCont{
     display: flex;
     justify-content: center;
-    img{
-      width: 45%;
-      display: flex;
-      justify-content: center;
-    }
+  }
+  .deloreanCont img{
+    width: 45%;
+    display: flex;
+    justify-content: center;
   }
   .delor-upg {
     display: grid;
@@ -212,45 +235,51 @@ footer{
     gap: 25px;
     position: relative;
     left: 15%;
-    div{
-      position: relative;
-      float: left;
-      top:40%;
-      img{
-        padding-top: 0.5rem;
-      }
-    }
-    h3{
-      position: absolute;
-    }
+  }
+  .delor-upg div{
+    position: relative;
+    float: left;
+    top:40%;
+  }
+  .delor-upg div img{
+    padding-top: 0.5rem;
+  }
+  .delor-upg h3{
+    position: absolute;
   }
   .delor-review{
     float: right;
     position: relative;
     right: 15%;
-    ul{
-      li{
-        padding: 1.2rem 0rem 0.4rem 0.6rem;
-        font-size: 1.1rem;
-      }
-    }
+  }
+  .delor-review ul li {
+    padding: 1.2rem 0rem 0.4rem 0.6rem;
+    font-size: 1.1rem;
+  }
+  /*Detail View*/
+  .vehicleDetail{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  footer{
+    margin-top: 5rem;
   }
 }
+
 /****SmallScreen****/
 @media  screen and (max-width: 992px){
   nav{
     position: relative;
     top: 1rem;
     padding: 2px 0 2px 0;
-    ul{
-      width: 100%;  
-      padding-inline-start: 0px;
-    }
   }
-  .deloreanCont{
-    img{
-      width: 101%;
-    }
+  nav ul{
+    width: 100%;  
+    padding-inline-start: 0px;
+  }
+  .deloreanCont img{
+    width: 101%;
   }
   .charact{
     position: absolute;
@@ -262,25 +291,19 @@ footer{
     grid-template-rows: 1fr 1fr ;
     gap: 25px;
     padding: 10px;
-    h3{
-      position: absolute;
-    }
-    img{
-      padding-top: 1rem;
-      width: 40%;
-    }
   }
-  .delor-container{
-    div{
-      position: relative;
-      top: 50%;
-    }
-    .delor-review{
-      ul{
-        li{
-          padding: 0.1rem 0rem 0.4rem 0.6rem;
-        }
-      }
-    }
+  .delor-upg h3{
+    position: absolute;
+  }
+  .delor-upg img{
+    padding-top: 1rem;
+    width: 40%;
+  }
+  .delor-container .delor-review ul li{
+    padding: 0.1rem 0rem 0.4rem 0.6rem;
+  }
+  .delor-container div{
+    position: relative;
+    top: 50%;
   }
 }
