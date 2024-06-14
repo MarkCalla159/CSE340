@@ -8,5 +8,6 @@ const utilities = require("../utilities")
 router.get("/type/:classificationId", invController.buildByClassificationId);
 // Route to build vehicle's info
 router.get("/detail/:detailId", invController.buildByDetailId);
-
+// Route to errors
+//router.get("/trigger-error", errorint.buildError);
 module.exports = router;

@@ -50,17 +50,16 @@ app.use(async (err, req, res, next) => {
 /* ***********************
 * Express Error Handler 500
 * Place after all other middleware
-*************************/
+*************************
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
-  if(err.status == 500){ message = err.message} else {message = 'NO NO NO, we dont have this car, but I know someone who knows someone else.'}
-  res.render("errors/error", {
+  res.status(500).render("errors/error", { 
     title: err.status || 'Server Error',
     message,
     nav
   })
-})
+})*/
 /* ***********************
  * Local Server Information
  * Values from .env (environment) file
