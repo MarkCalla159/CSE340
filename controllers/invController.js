@@ -27,15 +27,11 @@ invCont.buildByDetailId = async function (req, res, next) {
   const grid = await utilities.buildVehicleDet(data)
   let nav = await utilities.getNav()
   const vehicleInfo = data[0].inv_year + " " + data[0].inv_make + " " + data[0].inv_model
-  try {
     res.render("./inventory/views", {
       title: vehicleInfo,
       nav,
       grid,
   });
-  } catch(error){
-     console.error(/*My brain is broken*/)
-  }
 }
 errorint.buildError = async function (req, res, next) {
   throw new Error("Intentional error occurred");

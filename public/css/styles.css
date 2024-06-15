@@ -196,13 +196,144 @@ h3{
   color: #19323b;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+/*Login*/
+.logn, h1{
+  align-items: center;
+}
+h1{
+  text-align: center;
+}
+.logn{
+  width: 450px;
+  height: 450px;
+  margin: auto;
+  border: 0.2rem solid #19323b;
+  padding: 0.8rem 1.2rem;
+}
+.input-field span{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: #7a7d88;
+}
+.regter{
+  width: 450px;
+  height: 520px;
+  margin: auto;
+  border: 0.2rem solid #19323b;
+  padding: 0.6rem 1rem;
+}
+input[type=email], input[type=password], input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+.regter input[type=email], input[type=password], input[type=text] {
+  width: 100%;
+  padding: 10px 15px;
+  margin: 4px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+.input-field i{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0.825rem;
+}
+.input-field label{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 1.2em;
+}
+.input-field{
+  margin: 4% 0;
+}
+.button {
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(51,52,55,1) 34%, rgba(0,212,255,1) 100%);
+  border: calc(0.08 * 4em) solid transparent;
+  border-radius: calc(0.7 * 4em);
+  color: white;
+  display: flex;
+  justify-content: center;
+  font-size: larger;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  padding: 0.8rem 1.2rem;
+  margin: 13% 0;
+  border: none;
+  cursor: pointer;
+  align-self: center;
+  width: 100%;
+  box-shadow: 0 4px 15px rgb(108, 196, 204);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.button:hover{
+  box-shadow: 0 10px 20px rgba(63, 103, 107, 0.5);
+  transform: translateY(-5px);
+}
+/*Register*/
+.reg{
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(51,52,55,1) 34%, rgba(0,212,255,1) 100%);
+  border: calc(0.08 * 4em) solid transparent;
+  border-radius: calc(0.7 * 4em);
+  color: #F8F9FA;
+  display: flex;
+  justify-content: center;
+  font-size: larger;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  padding: 0.8rem 1.2rem;
+  margin: 6% 0;
+  border: none;
+  cursor: pointer;
+  align-self: center;
+  width: 100%;
+  box-shadow: 0 4px 15px rgb(108, 196, 204);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.reg:hover{
+  box-shadow: 0 10px 20px rgba(63, 103, 107, 0.5);
+  transform: translateY(-5px);
+}
+.registerAcc{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  align-items: center;
+  margin: auto;
+}
+.registerAcc a{
+  text-decoration: none;
+  color: #19323b;
+}
+input:required:invalid, input:focus:invalid {
+  background-image: url(/images/invalid.png);
+  background-position: right top;
+  background-repeat: no-repeat;
+}
+  input:required:valid {
+  background-image: url(/images/valid.png);
+  background-position: right top;
+  background-repeat: no-repeat;
+}
 footer{
   display: flex;
   justify-content: center;
-  font-family: 'Dodger';
   background-color:#3f676b;
   color: #F8F9FA;
   margin-top: 3.2rem;
+}
+footer .copyright{
+  font-family: 'Dodger';
+}
+footer a {
+  position: relative;
+  color: #F8F9FA;
+  font-size: 10px;
+  text-decoration: none;
+  float: left;
+  left: 20%;
+  margin-top: 1.2rem;
 }
 
 /****LargeScreen****/
