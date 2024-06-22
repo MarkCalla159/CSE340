@@ -3,6 +3,7 @@
     <% } else {
         res.redirect('/')
 } %>
+
 <%- messages() %>
 <% if (errors) { %>
     <ul class="notice">
@@ -29,7 +30,7 @@
         </div>
         <div class="input-field">
             <label for="account_password">Password:</label>
-            <input type="password" id="account_password" name="account_password" 
+            <input type="pa ssword" id="account_password" name="account_password" 
             required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
             <i class="bx bxs-lock-alt"></i>
             <span>Passwords must be at least 12 characters and contain 

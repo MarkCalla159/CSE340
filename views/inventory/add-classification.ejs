@@ -1,0 +1,26 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+} %>
+
+<%- messages() %>
+<% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+<%  }) %>
+   </ul>
+<% } %>
+<div class="newClassr">
+    <form class="newc" action="/inv/add-classification" method="POST">
+        <div>
+            <label for="classification_name" class="addClass">Classification Name:</label>
+            <p class="form-instructions">Name must be alphabetical characters only</p>
+            <input type="text" id="classification_name" name="classification_name" pattern="^[^\s!@#$%^&*]+$" required value="<%= locals.inv_classification %>">
+        </div>
+        <div>
+            <button class="classf" type="submit">Add Classification</button>
+        </div>
+    </form>
+</div>

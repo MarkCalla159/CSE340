@@ -8,6 +8,7 @@
 const express = require("express")
 const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
+const flash = require('connect-flash');
 const app = express()
 const static = require("./routes/static")
 const inventoryRoute = require("./routes/inventoryRoute")
@@ -38,9 +39,10 @@ app.use(session({
   saveUninitialized: true,
   name: 'sessionId',
 }))
-
+app.use(flash());
 // Express Messages Middleware
 app.use(require('connect-flash')())
+
 app.use(function(req, res, next){
   res.locals.messages = require('express-messages')(req, res)
   next()
@@ -55,7 +57,8 @@ app.use(static)
 app.get("/", utilities.handleErrors(baseController.buildHome))
 // Inventory routes
 app.use("/inv", inventoryRoute)
-app.use("/account", accountRoute)
+//Account routes
+//app.use("/account", accountRoute)
 // Account routes
 app.use("/account", require("./routes/accountRoute"))
 // File Not Found Route - must be last route in list

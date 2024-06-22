@@ -1,7 +1,6 @@
 const utilities = require("../utilities/")
 const accountModel = require("../models/account-model")
 const bcrypt = require("bcryptjs")
-require("dotenv").config()
 
 
 /* ****************************************
@@ -72,6 +71,7 @@ async function registerAccount(req, res) {
     res.status(501).render("account/register", {
       title: "Registration",
       nav,
+      errors:null,
     })
   }
 }
