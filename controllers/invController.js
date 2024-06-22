@@ -42,12 +42,16 @@ errorint.buildError = async function (req, res, next) {
  * ************************** */
 invCont.buildManagementView = async function (req, res, next) {
   let nav = await utilities.getNav();
-  res.render("./inventory/management", {
+  try {
+    res.render("./inventory/management", {
       title: "Vehicle Management",
       nav,
       errors: null,
-  });
-};
+    });
+  }catch (error) {
+    next(error);
+  }
+}
 
 /* ***************************
  *  Build Add Classification
