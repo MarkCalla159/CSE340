@@ -203,7 +203,7 @@ h3{
 h1{
   text-align: center;
 }
-.logn{
+.logn, .newClassifOrVeh{
   width: 450px;
   height: 450px;
   margin: auto;
@@ -221,7 +221,8 @@ h1{
   border: 0.2rem solid #19323b;
   padding: 0.6rem 1rem;
 }
-input[type=email], input[type=password], input[type=text] {
+
+input[type=email], input[type=password], select {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -229,7 +230,14 @@ input[type=email], input[type=password], input[type=text] {
   border: 1px solid #ccc;
   box-sizing: border-box;
 }
-.regter input[type=email], input[type=password], input[type=text] {
+textarea{
+  width: 100%;
+  padding: 12px 20px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+.regter input[type=email], input[type=password], input[type=text], input[type=number] {
   width: 100%;
   padding: 10px 15px;
   margin: 4px 0;
@@ -315,6 +323,111 @@ input:required:invalid, input:focus:invalid {
   background-image: url(/images/valid.png);
   background-position: right top;
   background-repeat: no-repeat;
+}
+/*Management*/
+.nclassi, .nveh{
+  margin: 2em;
+  font-family: 'Good-Times';
+}
+.newClassifOrVeh{
+  background: rgb(36,0,0);
+  background: linear-gradient(90deg, rgba(36,0,0,0.3478641456582633) 0%, rgba(198,103,23,1) 0%, rgba(202,111,21,1) 0%, rgba(255,218,0,0.8464635854341737) 56%);
+}
+.manage, .addvehicle{
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(51,52,55,1) 34%, rgba(0,212,255,1) 100%);
+  border: calc(0.08 * 4em) solid transparent;
+  border-radius: calc(0.7 * 4em);
+  color: white;
+  display: flex;
+  justify-content: center;
+  font-size: larger;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  padding: 0.4rem 0.8rem;
+  margin: 10% 0;
+  border: none;
+  cursor: pointer;
+  align-self: center;
+  width: 70%;
+  box-shadow: 0 4px 15px rgb(108, 196, 204);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.manage:hover{
+  box-shadow: 0 10px 20px rgba(63, 103, 107, 0.5);
+  transform: translateY(-5px);
+}
+/*New Classification*/
+.newClassr{
+  width: 450px;
+  height: 450px;
+  margin: auto;
+  border: 0.2rem solid #19323b;
+  padding: 0.8rem 1.2rem;
+}
+.addClass{
+  margin: 2rem 0 0 0;
+  font-family: 'Good-Times';
+  font-size: larger;
+}
+.newc p{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: #7a7d88;
+  margin: 1.4em;
+}
+.newc input[type=text] {
+  width: 100%;
+  padding: 10px 15px;
+  margin: 14px 0;
+}
+.classf{
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(51,52,55,1) 34%, rgba(0,212,255,1) 100%);
+  border: calc(0.08 * 4em) solid transparent;
+  border-radius: calc(0.7 * 4em);
+  color: white;
+  display: flex;
+  justify-content: center;
+  font-size: larger;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  padding: 0.4rem 0.8rem;
+  margin: 5% 0;
+  border: none;
+  cursor: pointer;
+  align-self: center;
+  width: 70%;
+  box-shadow: 0 4px 15px rgb(108, 196, 204);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+/*Add New Vehicle*/
+.addInvent{
+  width: 450px;
+  height: 970px;
+  margin: auto;
+  border: 0.2rem solid #19323b;
+  padding: 0.8rem 1.2rem;
+}
+.addvehicle{
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(51,52,55,1) 34%, rgba(0,212,255,1) 100%);
+  border: calc(0.08 * 4em) solid transparent;
+  border-radius: calc(0.7 * 4em);
+  color: white;
+  display: flex;
+  justify-content: center;
+  font-size: larger;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  padding: 0.4rem 0.8rem;
+  margin: 7% 0;
+  border: none;
+  cursor: pointer;
+  align-self: center;
+  width: 70%;
+  box-shadow: 0 4px 15px rgb(108, 196, 204);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.addvehicle:hover{
+  box-shadow: 0 10px 20px rgba(63, 103, 107, 0.5);
+  transform: translateY(-5px);
 }
 footer{
   display: flex;
