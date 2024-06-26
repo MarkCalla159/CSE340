@@ -35,6 +35,7 @@
             <i class="bx bxs-lock-alt"></i>
             <span>Passwords must be at least 12 characters and contain 
                 at least 1 number, 1 capital letter and 1 special character.</span>
+            <span id="pswdBtn">Show Password</span>
         </div>
     
         <div>
@@ -43,5 +44,19 @@
         <p class="registerAcc">
            Already have an Account? <a href="/account/Login">Log-in</a>
         </p>
-    </form>    
+    </form>
+    <script>
+        const pswdBtn = document.querySelector("#pswdBtn");
+        pswdBtn.addEventListener("click", function () {
+            const pswdInput = document.getElementById("account_password");
+            const type = pswdInput.getAttribute("type");
+            if (type === "password") {
+                pswdInput.setAttribute("type", "text");
+                pswdBtn.innerHTML = "Hide Password";
+            } else {
+                pswdInput.setAttribute("type", "password");
+                pswdBtn.innerHTML = "Show Password";
+            }
+        });
+    </script>
 </div>

@@ -324,6 +324,10 @@ input:required:invalid, input:focus:invalid {
   background-position: right top;
   background-repeat: no-repeat;
 }
+#pswdBtn {
+  cursor: grab;
+  color: #c66717;
+}
 /*Management*/
 .nclassi, .nveh{
   margin: 2em;
