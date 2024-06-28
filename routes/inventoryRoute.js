@@ -4,12 +4,13 @@ const router = new express.Router()
 const invController = require("../controllers/invController")
 const utilities = require("../utilities")
 const classValidate = require("../utilities/inventory-validation")
+
 // Route to build inventory by classification view
 router.get("/type/:classificationId", invController.buildByClassificationId);
 // Route to build vehicle's info
 router.get("/detail/:detailId", invController.buildByDetailId);
 // Route to errors
-//router.get("/trigger-error", errorint.buildError);
+router.get("/error/", invController.buildError);
 //Route to build management
 router.get("/",invController.buildManagementView);
 //Route to get build add classification

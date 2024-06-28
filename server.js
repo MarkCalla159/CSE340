@@ -18,6 +18,7 @@ const utilities = require("./utilities")
 const session = require("express-session")
 const pool = require('./database/')
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
 /* ***********************
  * View Engine and Templates
  *************************/
@@ -50,6 +51,8 @@ app.use(function(req, res, next){
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use(cookieParser())
+app.use(utilities.checkJWTToken)
 /* ***********************
  * Routes
  *************************/
@@ -57,8 +60,6 @@ app.use(static)
 app.get("/", utilities.handleErrors(baseController.buildHome))
 // Inventory routes
 app.use("/inv", inventoryRoute)
-//Account routes
-//app.use("/account", accountRoute)
 // Account routes
 app.use("/account", require("./routes/accountRoute"))
 // File Not Found Route - must be last route in list
@@ -75,7 +76,7 @@ app.use(async (req, res, next) => {
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
-  if(err.status == 404){ message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route?'}
+  if(err.status == 404){ message = err.message} else {message = 'I am running away from my responsibilities. And it feels good.-Michael Scott'}
   res.render("errors/error", {
     title: err.status || 'Server Error',
     message,
@@ -85,16 +86,16 @@ app.use(async (err, req, res, next) => {
 /* ***********************
 * Express Error Handler 500
 * Place after all other middleware
-*************************
+************************
 app.use(async (err, req, res, next) => {
-  let nav = await utilities.getNav()
+  let nav = await utilities.getNav();
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
-  if(err.status == 404){ message = err.message} else {message = 'NONNONO, We do not have that car but I know someone who knows someone else.'}
-    title: err.status || 'Server Error',
-    message,
-    nav
+  res.status(500).render("errors/error", {
+    title: "This looks pretty good",
+    message: "I am running away from my responsibilities. And it feels good.",
+    nav,
   })
-})*/
+});*/
 /* ***********************
  * Local Server Information
  * Values from .env (environment) file

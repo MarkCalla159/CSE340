@@ -1,0 +1,21 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+    } %>
+
+You're logged in.
+
+<%- messages() %>
+
+<div class="newClassifOrVeh">
+    <p class="nclassi">Click the button to add a New Classification</p>
+    <button class="manage" id="managebtt" onclick="location.href='/inv/add-classification'">
+        Add New Classification
+    </button>
+
+    <p class="nveh">Click the button to add a New Vehicle</p>
+    <button class="manage" id="managebtt" onclick="location.href='/inv/add-inventory'">
+        Add New Vehicle
+    </button>
+</div>
