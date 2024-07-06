@@ -16,6 +16,7 @@ async function buildLogin(req, res, next) {
     errors: null,
   });
 }
+
 /* ****************************************
  *  Deliver registration view
  * *************************************** */
@@ -61,7 +62,7 @@ async function registerAccount(req, res) {
     account_firstname,
     account_lastname,
     account_email,
-    account_password,
+    //account_password,
     hashedPassword
   );
 
@@ -85,21 +86,23 @@ async function registerAccount(req, res) {
   }
 }
 /* ****************************************
-*  Deliver account view
-* *************************************** */
-async function buildManagement(req, res, next) {
+ *  Deliver account view
+ * *************************************** */
+async function buildManagement(req, res) {
   let nav = await utilities.getNav();
   req.flash("notice", "This is a flash message.");
-  res.render("account/management-account", {
-    title: "Vehicle Management",
+  const classificationSelect = await utilities.buildClassificationList();
+  res.render("account/account-management", {
+    title: "Account Management",
     nav,
+    classificationSelect,
     errors: null,
   });
 }
 /* ****************************************
  *  Process login request
  * ************************************ */
-async function accountLogin(req, res) {
+async function accountLogin(req, res, next) {
   let nav = await utilities.getNav();
   const { account_email, account_password } = req.body;
   const accountData = await accountModel.getAccountByEmail(account_email);
@@ -136,4 +139,10 @@ async function accountLogin(req, res) {
     return new Error("Access Forbidden");
   }
 }
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildManagement };
+module.exports = {
+  buildLogin,
+  buildRegister,
+  registerAccount,
+  accountLogin,
+  buildManagement,
+};

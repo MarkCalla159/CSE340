@@ -205,7 +205,14 @@ h1{
 }
 .logn, .newClassifOrVeh{
   width: 450px;
-  height: 450px;
+  height: 100%;
+  margin: auto;
+  border: 0.2rem solid #19323b;
+  padding: 0.8rem 1.2rem;
+}
+.accountManagement{
+  width: 450px;
+  height: 100%;
   margin: auto;
   border: 0.2rem solid #19323b;
   padding: 0.8rem 1.2rem;
@@ -405,7 +412,7 @@ input:required:invalid, input:focus:invalid {
 /*Add New Vehicle*/
 .addInvent{
   width: 450px;
-  height: 970px;
+  height: 100%;
   margin: auto;
   border: 0.2rem solid #19323b;
   padding: 0.8rem 1.2rem;

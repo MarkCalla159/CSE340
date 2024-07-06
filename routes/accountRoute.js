@@ -1,7 +1,7 @@
 const express = require("express")
 const router = new express.Router() 
 const accountController = require("../controllers/accountController")
-const utilities = require("../utilities/")
+const utilities = require("../utilities/index")
 const regValidate = require('../utilities/account-validation')
 
 //Route to build login
@@ -11,7 +11,11 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin))
 // Route to build register view
 router.get("/register", utilities.handleErrors(accountController.buildRegister))
 //Route to build account view
-router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildManagement))
+router.get(
+    "/",
+    utilities.checkLogin,
+    utilities.handleErrors(accountController.buildManagement)
+)
 // Process the registration data
 router.post(
     "/register",
