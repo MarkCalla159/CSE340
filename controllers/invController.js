@@ -68,7 +68,6 @@ invCont.buildManagementView = async function (req, res, next) {
  * ************************** */
 invCont.buildAddClassification = async function (req, res, next) {
   let nav = await utilities.getNav();
-  
   try {
     res.render("inventory/add-classification", {
       title: "Add New Classification",
@@ -202,9 +201,10 @@ invCont.getInventoryJSON = async (req, res, next) => {
  *  Build Edit Inventory ID
  * ************************** */
 invCont.buildEditInv = async function (req, res, next) {
-  const inv_id = parseInt(req.params.detailId);
+  const inv_id = parseInt(req.params.inv_id);
   let nav = await utilities.getNav();
-  const itemData = await invModel.getVehicleByDetId(inv_id);
+  const data = await invModel.getVehicleByDetId(inv_id);
+  const itemData = data[0];
   const classificationSelect = await utilities.buildClassificationList(
     itemData.classification_id
   );
@@ -245,6 +245,7 @@ invCont.updateInventory = async function (req, res, next) {
     inv_color,
     classification_id,
   } = req.body;
+  
   const updateResult = await invModel.updateInventory(
     inv_id,
     inv_make,
@@ -294,7 +295,8 @@ invCont.updateInventory = async function (req, res, next) {
 invCont.buildDelete = async function (req, res, next){
   const inv_id = parseInt(req.params.inv_id)
   let nav = await utilities.getNav()
-  const itemData = await invModel.getVehicleByDetId(inv_id)
+  const data = await invModel.getVehicleByDetId(inv_id)
+  const itemData = data[0];
   const itemName = `${itemData.inv_make} ${itemData.inv_model}`
   res.render("./inventory/delete-confirm", {
     title: "Delete " + itemName,

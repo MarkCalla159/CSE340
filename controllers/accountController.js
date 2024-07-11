@@ -88,7 +88,7 @@ async function registerAccount(req, res) {
 /* ****************************************
  *  Deliver account view
  * *************************************** */
-async function buildManagement(req, res) {
+async function buildAccManagement(req, res) {
   let nav = await utilities.getNav();
   req.flash("notice", "This is a flash message.");
   const classificationSelect = await utilities.buildClassificationList();
@@ -144,5 +144,5 @@ module.exports = {
   buildRegister,
   registerAccount,
   accountLogin,
-  buildManagement,
+  buildAccManagement,
 };

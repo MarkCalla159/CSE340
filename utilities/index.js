@@ -78,7 +78,7 @@ Util.buildVehicleDet = async function(data){
       grid += '<p class="back"><strong>Price: ' +'$ '+ new Intl.NumberFormat('en-US').format(vehicle.inv_price) +'</strong></p>'
       grid += '<p><strong>Description:</strong> ' + vehicle.inv_description +'</p>'
       grid += '<p class="back"><strong>Color:</strong> ' + vehicle.inv_color +'</p>'
-      grid += '<p><strong>Mileage:</strong> ' + vehicle.inv_miles +'</p>'
+      grid += '<p><strong>Mileage:</strong> ' +new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + ' miles' + '</p>'
       grid += '</div>'
     })
     grid += '</div>'

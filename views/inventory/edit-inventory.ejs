@@ -12,7 +12,8 @@
    </ul>
 <% } %>
 <div class="addInvent">
-    <form class="addVeh" action="/inv/update" id="updateForm" method="POST">
+    
+    <form class="addVeh" action="/inv/update" id="updateForm" method="post">
         <div class="input-field">
             <label for="inv_classification">Classification:</label>
             <%- classificationSelect  %>
@@ -28,7 +29,7 @@
         </div>
         <div class="input-field">
             <label for="inv_description">Description:</label>
-            <textarea id="inv_description" name="inv_description" required <% if(locals.inv_description) { %> value="<%= locals.inv_description %>"<% } %>>   
+            <textarea id="inv_description" name="inv_description" required> <% if(locals.inv_description) { %> <%= locals.inv_description %><% } %>
             </textarea>
         </div>
         <div class="input-field">
