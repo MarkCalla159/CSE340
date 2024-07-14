@@ -9,10 +9,11 @@ require("dotenv").config();
  * *************************************** */
 async function buildLogin(req, res, next) {
   let nav = await utilities.getNav();
-  req.flash("notice", "This is a flash message.");
+  //req.flash("notice", "This is a flash message.");
   res.render("account/login", {
     title: "Login",
     nav,
+    messages: req.flash(),
     errors: null,
   });
 }
@@ -90,7 +91,7 @@ async function registerAccount(req, res) {
  * *************************************** */
 async function buildAccManagement(req, res) {
   let nav = await utilities.getNav();
-  req.flash("notice", "This is a flash message.");
+  //req.flash("notice", "This is a flash message.");
   const classificationSelect = await utilities.buildClassificationList();
   res.render("account/account-management", {
     title: "Account Management",
@@ -139,10 +140,122 @@ async function accountLogin(req, res, next) {
     return new Error("Access Forbidden");
   }
 }
+/* ****************************************
+ *  Process login request
+ * ************************************ */
+async function buildLogout(req, res){
+  res.clearCookie("jwt")
+  res.redirect("/")
+}
+/* ****************************************
+ *  Deliver Update account view
+ * ***************************************/
+async function updateAccInfo(req, res, next) {
+    let nav = await utilities.getNav();
+    const account_id = req.params.account_id;
+    const data = await accountModel.getAccountById(account_id);
+    const accData = data[0];
+    const accName = `${accData.account_firstname}`
+    res.render("./account/update-account", {
+      title: "Update " + accName + "'s Account",
+      nav,
+      account_firstname: accData.account_firstname,
+      account_lastname: accData.account_lastname,
+      account_email: accData.account_email,
+      errors: null,
+    });
+}
+/* ****************************************
+ *  Process update info request
+ * ************************************ */
+async function updateInfo(req, res, next) {
+  let nav = await utilities.getNav();
+  const { account_id, account_firstname, account_lastname, account_email } = req.body;
+  const accData = await accountModel.getAccountById(account_id);
+  const updateData = await accountModel.updateAccoInfo(
+    account_id,
+    account_firstname,
+    account_lastname,
+    account_email
+  );
+  if (updateData) {
+    const accName = `${account_firstname}` + " " + `${account_lastname}`
+    req.flash("notice", `${accName} your General Info was successfully update`);
+    //res.clearCookie("jwt");
+    //const updateAccountInfo = await accountModel.getAccountById(account_id);
+    //res.clearCookie("jwt");
+    //const updateAccountInfo = await accountModel.getAccountById(account_id);
+   // delete updateAccountInfo.account_password;
+    //const accessToken = jwt.sign(
+      //  updateAccountInfo,
+        //process.env.ACCESS_TOKEN_SECRET,
+       // { expiresIn: 3600 }
+    //);
+    //if (process.env.NODE_ENV === "development") {
+      //  res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 });
+    //} else {
+      //  res.cookie("jwt", accessToken, {
+        //    httpOnly: true,
+          //  secure: true,
+            //maxAge: 3600 * 1000,
+        //})
+    res.redirect("/account/");
+    //const updateData = await accountModel.getAccountById(account_id)
+  } else {
+    const accName = `${account_firstname}  ${account_lastname}`;
+    req.flash(
+      "notice",
+      "My apologies, you are not able to update your General Info"
+    );
+    res.status(501).render("/account/update-account", {
+      title: "Update " + accName + "'s Account",
+      nav,
+      account_firstname: accData.account_firstname,
+      account_lastname: accData.account_lastname,
+      account_email: accData.account_email,
+      errors: null,
+    });
+  }
+}
+/* ****************************************
+ *  Process update info request
+ * ************************************ */
+async function updatePassword(req, res, next){
+  let nav = await utilities.getNav();
+  const {
+    account_id,
+    account_password
+  } =req.body;
+  const accData = await accountModel.getAccountById(account_id);
+  const hashedPassword = bcrypt.hashSync(account_password, 10);
+  const updatePassword = await accountModel.updatePass(account_id, hashedPassword);
+  const accName = `${accData.account_firstname}`
+  if (updatePassword) {
+    req.flash("notice", " Your password was changed")
+    res.status(201).render("account/account-management",{
+      title: "Account Management",
+      nav,
+      errors: null
+    })
+  } else {
+    req.flash("notice", "Sorry something went wrong and your password were not update")
+    req.status(501).render("account/update-account",{
+      title: "Update " + accName + "'s Account",
+      nav,
+      account_firstname: accData.account_firstname,
+      account_lastname: accData.account_lastname,
+      account_email: accData.account_email
+    })
+  }
+}
 module.exports = {
   buildLogin,
   buildRegister,
   registerAccount,
   accountLogin,
   buildAccManagement,
+  buildLogout,
+  updateAccInfo,
+  updateInfo,
+  updatePassword
 };

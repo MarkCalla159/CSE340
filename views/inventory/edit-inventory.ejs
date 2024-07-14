@@ -66,10 +66,8 @@
             <button class="addvehicle" type="submit">
                 UPDATE VEHICLE
             </button>
-            <div>
-                <input type="hidden" name="inv_id" <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
-                    <% } %>>
-            </div>
+            <input type="hidden" name="inv_id" <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+                <% } %>>
         </div>
     </form>
 </div>

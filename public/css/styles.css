@@ -228,7 +228,12 @@ h1{
   border: 0.2rem solid #19323b;
   padding: 0.6rem 1rem;
 }
-
+.update-general-account{
+  width: 450px;
+  height: 100%;
+  margin: auto;
+  border: 0.2rem solid #19323b;
+  padding: 0.6rem 1rem;}
 input[type=email], input[type=password], select {
   width: 100%;
   padding: 12px 20px;
@@ -335,7 +340,49 @@ input:required:invalid, input:focus:invalid {
   cursor: grab;
   color: #c66717;
 }
+/*Table*/
+table {
+  background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(51, 52, 55, 1) 34%, rgba(0, 212, 255, 1) 100%);
+  border-collapse: collapse;
+  text-align: center;
+  padding: 14px;
+  width: 100%;
+}
+
+th {
+  background-color: rgba(5, 5, 100, 95);
+  border-bottom: 1px solid rgb(210, 220, 250);
+  color: white;
+}
+tr{
+  margin: 0.5em;
+}
+td {
+  color: white;
+  border: 1.5px solid rgba(240, 240, 240, 10);
+}
+td a{
+  text-decoration: none;
+  color: white;
+}
 /*Management*/
+.accountManagement a {
+  text-decoration: none;
+  font-family: 'Good-Times';
+  font-size: large;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.accountManagement p{
+  font-family: 'Good-Times';
+  font-size: small;
+}
+.accountManagement h3{
+  padding: 14px;
+  background-color: #333437;
+  height: 100%;
+}
 .nclassi, .nveh{
   margin: 2em;
   font-family: 'Good-Times';
