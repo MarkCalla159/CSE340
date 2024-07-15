@@ -218,13 +218,13 @@ async function updateInfo(req, res, next) {
 async function updatePassword(req, res, next){
   let nav = await utilities.getNav();
   const {
-    account_id,
     account_password
   } =req.body;
-  const accData = await accountModel.getAccountById(account_id);
+  const account_id = res.locals.accountData.account_id;
+
   const hashedPassword = bcrypt.hashSync(account_password, 10);
   const updatePassword = await accountModel.updatePass(account_id, hashedPassword);
-  const accName = `${accData.account_firstname}`
+  
   if (updatePassword) {
     req.flash("notice", " Your password was changed")
     res.status(201).render("account/account-management",{
@@ -237,9 +237,9 @@ async function updatePassword(req, res, next){
     req.status(501).render("account/update-account",{
       title: "Update " + accName + "'s Account",
       nav,
-      account_firstname: accData.account_firstname,
-      account_lastname: accData.account_lastname,
-      account_email: accData.account_email
+      account_firstname: res.locals.accountData.account_firstname,
+      account_lastname: res.locals.accountData.account_lastname,
+      account_email: res.locals.accountData.account_email
     })
   }
 }
