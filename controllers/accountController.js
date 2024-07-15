@@ -91,8 +91,6 @@ async function registerAccount(req, res) {
  * *************************************** */
 async function buildAccManagement(req, res) {
   let nav = await utilities.getNav();
-  req.flash("notice", "This is a flash message.");
-  //req.flash("notice", "This is a flash message.");
   //const classificationSelect = await utilities.buildClassificationList();
   //if (res.locals.loggedin == 1) {
   res.render("account/account-management", {
