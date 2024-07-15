@@ -170,8 +170,8 @@ async function updateAccInfo(req, res, next) {
  * ************************************ */
 async function updateInfo(req, res, next) {
   let nav = await utilities.getNav();
-  const { account_id, account_firstname, account_lastname, account_email } = req.body;
-  const accData = await accountModel.getAccountById(account_id);
+  const account_id = res.locals.accountData.account_id;
+  const { account_firstname, account_lastname, account_email } = req.body;
   const updateData = await accountModel.updateAccoInfo(
     account_id,
     account_firstname,
@@ -181,26 +181,15 @@ async function updateInfo(req, res, next) {
   if (updateData) {
     const accName = `${account_firstname}` + " " + `${account_lastname}`
     req.flash("notice", `${accName} your General Info was successfully update`);
-    //res.clearCookie("jwt");
-    //const updateAccountInfo = await accountModel.getAccountById(account_id);
-    //res.clearCookie("jwt");
-    //const updateAccountInfo = await accountModel.getAccountById(account_id);
-   // delete updateAccountInfo.account_password;
-    //const accessToken = jwt.sign(
-      //  updateAccountInfo,
-        //process.env.ACCESS_TOKEN_SECRET,
-       // { expiresIn: 3600 }
-    //);
-    //if (process.env.NODE_ENV === "development") {
-      //  res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 });
-    //} else {
-      //  res.cookie("jwt", accessToken, {
-        //    httpOnly: true,
-          //  secure: true,
-            //maxAge: 3600 * 1000,
-        //})
     res.redirect("/account/");
     //const updateData = await accountModel.getAccountById(account_id)
+    const accessToken = jwt.sign(
+      updateData,
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: 3600 * 1000 }
+  );
+  res.cookie('jwt', accessToken, { httpOnly: true, maxAge: 3600 * 1000 });
+  res.status(201).redirect('/account/');
   } else {
     const accName = `${account_firstname}  ${account_lastname}`;
     req.flash(
@@ -210,9 +199,6 @@ async function updateInfo(req, res, next) {
     res.status(501).render("/account/update-account", {
       title: "Update " + accName + "'s Account",
       nav,
-      account_firstname: accData.account_firstname,
-      account_lastname: accData.account_lastname,
-      account_email: accData.account_email,
       errors: null,
     });
   }

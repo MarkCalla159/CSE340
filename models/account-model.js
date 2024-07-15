@@ -54,10 +54,10 @@ async function getAccountById (account_id) {
  * Update account info by account ID
  * ************************** */
 async function updateAccoInfo(
+  account_id,
   account_firstname,
   account_lastname,
-  account_email,
-  account_id
+  account_email
 ) {
   try {
     const sql =

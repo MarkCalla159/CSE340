@@ -30,6 +30,10 @@ router.post(
     regValidate.checkLoginData,
     utilities.handleErrors(accountController.accountLogin)
 )
+router.get("/update-ginfo", 
+    utilities.checkLogin, 
+    utilities.handleErrors(accountController.updateInfo)
+)
 //Route to edit info by account ID
 router.get("/update-account/:account_id", utilities.handleErrors(accountController.updateAccInfo))
 //Process the update general info account
