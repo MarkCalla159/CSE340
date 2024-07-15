@@ -70,7 +70,6 @@ async function updateAccoInfo(
     ]);
     return data.rows[0]
   } catch (error) {
-    console.log("Account wasn't updated.")
     return error.message;
   }
 }
