@@ -197,7 +197,7 @@ async function updateInfo(req, res, next) {
       { expiresIn: 3600 * 1000 }
   );
   res.cookie('jwt', accessToken, { httpOnly: true, maxAge: 3600 * 1000 });
-  res.status(201).redirect('/account/');
+  res.status(201).redirect('account/account-management');
   } else {
     const accName = `${account_firstname}  ${account_lastname}`;
     req.flash(
