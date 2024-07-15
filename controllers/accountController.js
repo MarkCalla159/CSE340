@@ -189,7 +189,7 @@ async function updateInfo(req, res, next) {
   if (updateData) {
     const accName = `${account_firstname}` + " " + `${account_lastname}`
     req.flash("notice", `${accName} your General Info was successfully update`);
-    res.clearCookie("jwt")
+    //res.clearCookie("jwt")
     res.redirect("/account/");
     //const updateData = await accountModel.getAccountById(account_id)
     const accessToken = jwt.sign(
