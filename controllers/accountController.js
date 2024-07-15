@@ -189,7 +189,7 @@ async function updateInfo(req, res, next) {
     const accName = `${account_firstname}` + " " + `${account_lastname}`
     req.flash("notice", `${accName} your General Info was successfully update, please Logout to see the changes.`);
     //res.clearCookie("jwt")
-    res.redirect("/account/");
+    //res.redirect("/account/");
     //const updateData = await accountModel.getAccountById(account_id)
     const accessToken = jwt.sign(
       updateData,
@@ -197,7 +197,7 @@ async function updateInfo(req, res, next) {
       { expiresIn: 3600 * 1000 }
   );
   res.cookie('jwt', accessToken, { httpOnly: true, maxAge: 3600 * 1000 });
-  res.status(201).redirect('account/account-management');
+  res.status(201).redirect('/account/');
   } else {
     const accName = `${account_firstname}  ${account_lastname}`;
     req.flash(
