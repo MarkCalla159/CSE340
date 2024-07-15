@@ -92,13 +92,21 @@ async function registerAccount(req, res) {
 async function buildAccManagement(req, res) {
   let nav = await utilities.getNav();
   //req.flash("notice", "This is a flash message.");
-  const classificationSelect = await utilities.buildClassificationList();
-  res.render("account/account-management", {
-    title: "Account Management",
-    nav,
-    classificationSelect,
-    errors: null,
-  });
+  //const classificationSelect = await utilities.buildClassificationList();
+  if (res.locals.loggedin == 1) {
+    res.render("account/account-management", {
+      title: "Account Management",
+      nav,
+      //classificationSelect,
+      errors: null,
+    });
+  } else {
+    res.render("account/login", {
+      title: "Login",
+      nav,
+      errors: null,
+    });
+  }
 }
 /* ****************************************
  *  Process login request
@@ -181,6 +189,7 @@ async function updateInfo(req, res, next) {
   if (updateData) {
     const accName = `${account_firstname}` + " " + `${account_lastname}`
     req.flash("notice", `${accName} your General Info was successfully update`);
+    res.clearCookie("jwt")
     res.redirect("/account/");
     //const updateData = await accountModel.getAccountById(account_id)
     const accessToken = jwt.sign(
