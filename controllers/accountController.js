@@ -91,21 +91,22 @@ async function registerAccount(req, res) {
  * *************************************** */
 async function buildAccManagement(req, res) {
   let nav = await utilities.getNav();
+  req.flash("notice", "This is a flash message.");
   //req.flash("notice", "This is a flash message.");
   //const classificationSelect = await utilities.buildClassificationList();
   //if (res.locals.loggedin == 1) {
-    res.render("account/account-management", {
-      title: "Account Management",
-      nav,
-      //classificationSelect,
-      errors: null,
-    });
+  res.render("account/account-management", {
+    title: "Account Management",
+    nav,
+    //classificationSelect,
+    errors: null,
+  });
   //} else {
-   // res.render("account/login", {
-    //  title: "Login",
-    //  nav,
-     // errors: null,
-    //});
+  // res.render("account/login", {
+  //  title: "Login",
+  //  nav,
+  // errors: null,
+  //});
   //}
 }
 /* ****************************************
