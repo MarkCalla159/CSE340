@@ -114,5 +114,5 @@ async function processDelete(inv_id){
 }
 
 module.exports = {getClassifications, getInventoryByClassificationId, getVehicleByDetId, addNewClassification, addNewInventory,
-  updateInventory, processDelete
+  updateInventory, processDelet
 };
