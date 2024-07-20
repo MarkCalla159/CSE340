@@ -164,14 +164,7 @@ Util.buildReview = async function (data, showDet = true){
   let grid = '';
   try {
     let grid = '';
-    //if (!data || !data.inv_id) {
-    //  throw new Error("Invalid review data");
-    //}
     const vehicleDet = await invModel.getVehicleByDetId(data.inv_id);
-    //if (!vehicleDet || vehicleDet.length === 0) {
-     // throw new Error("No vehicle details found for the given inv_id");
-    //}
-
     const veh = vehicleDet[0];
 
     if (data) {

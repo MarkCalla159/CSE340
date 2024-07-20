@@ -13,15 +13,18 @@
   <% if (locals.loggedin){ %>
     <form action="/inv/add-review" method="post">
       <div class="input-field">
+        <input type="hidden" name="account_id"  value="<%= locals.account_id %>">
+        <input type="hidden" name="inv_id"  value="<%= locals.inv_id %>">
         <label for="review_text">Review Text:</label>
-        <textarea name="review_text" id="review_text" required><%= locals.review_text %></textarea>
+        <textarea name="review_text" id="review_text" required></textarea>
+      </div>
+      <div class="input-field">
+        <label for="review_date">Review Date:</label>
+        <input type="date" name="review_date" id="review_date">
       </div>
       <div>
         <button class="addvehicle">Submit Review</button>
       </div>
-      <input type="hidden" name="inv_id" <% if(locals.inv_id) { %> value="<%= locals.inv_id %>" <% } %>>
-      <input type="hidden" name="account_id" <% if(locals.account_id) { %> value="<%= locals.account_id %>" <% } %>>
-    
     </form>
   <% } else { %>
        <p>Please <a href="/account/login">Log IN</a> to add a review</p>

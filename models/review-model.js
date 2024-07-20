@@ -2,7 +2,7 @@ const pool = require("../database/")
 /* ***************************
  *  Get Review by ID (is it a rhyme?)
  * ***************************/
-async function getReviewId(inv_id){
+async function getReviewId(review_id){
   try {
     const data = await pool.query(
       `SELECT * FROM invReview AS iv 
@@ -17,10 +17,10 @@ async function getReviewId(inv_id){
 /* ***************************
  *  Add a Review (is it a rhyme?)
  * ***************************/
-async function addNewReview(account_id, inv_id, review_text) {
+async function addNewReview(account_id, inv_id, review_text, review_date) {
   try {
-    const data = "INSERT INTO invReview (account_id, inv_id, review_text) VALUES ($1, $2, $3) RETURNING *";
-    return await pool.query(data, [account_id, inv_id, review_text, review_date])
+    const data = "INSERT INTO invReview (account_id, inv_id, review_text, review_date) VALUES ($1, $2, $3, $4) RETURNING *";
+    return await pool.query(data, [account_id, inv_id, review_text, review_date]);
   } catch (error) {
     //console.error("Error en addNewReview:", error);
     return error.message
@@ -50,7 +50,20 @@ async function getReviewByAccId(account_id) {
     const sql = await pool.query("SELECT * FROM invReview WHERE account_id = $1", 
       [account_id,]
     );
-    return sql.rows[0];
+    return sql.rows;
+  } catch (error) {
+    return error.message;
+  }
+}
+/* ***************************
+ * Get Review by ACC ID (?Not a rhyme)
+ * ***************************/
+async function getReviewByInvId(inv_id) {
+  try {
+    const sql = await pool.query("SELECT * FROM invReview WHERE inv_id = $1", 
+      [inv_id,]
+    );
+    return sql.rows;
   } catch (error) {
     return error.message;
   }
@@ -67,4 +80,4 @@ async function deleteRev(review_id){
     return error.message
   }
 }
-module.exports = {addNewReview, getReviewId, editReview, getReviewByAccId, deleteRev}
+module.exports = {addNewReview, getReviewId, editReview, getReviewByAccId, getReviewByInvId, deleteRev}

@@ -356,7 +356,15 @@ invCont.addReview = async function (req, res, next) {
   try {
     //console.log("Entrando a addReview");
     let nav = await utilities.getNav();
-    const { review_text, account_id, inv_id } = req.body;
+    const {account_id, inv_id, review_text} = req.body;
+
+    console.log("account_id:", account_id);
+    console.log("inv_id:", inv_id);
+
+    if (isNaN(parseInt(account_id)) || isNaN(parseInt(inv_id))) {
+      req.flash("error", "Invalid account_id or inv_id");
+      return res.redirect("back");
+    }
     const review_date = new Date();
     const review = await revModel.addNewReview(
       parseInt(account_id),
@@ -392,25 +400,14 @@ invCont.addReview = async function (req, res, next) {
 invCont.buildReview = async function (req, res, next) {
   try {
     const nav = await utilities.getNav();
-    const review_id = parseInt(req.params.review_id, 10);
-    const {
-      account_id,
-      inv_id
-    } = req.params
-    /*if (isNaN(review_id)) {
-      req.flash("error", "Invalid review ID.");
-      return res.status(400).redirect("/");
-    }
-    const data = await revModel.getReviewId(review_id);
-    const grid = await utilities.buildReview(data);*/
-
+    const { review_id } = req.params
+    const data = await revModel.getReviewId(review_id)
+    const rev = await utilities.buildReview(data)
     res.render("inventory/add-review", {
       title: "Current Review",
       nav,
-      grid,
-      review_id,
-      account_id,
-      inv_id,
+      rev,
+      account_id: req.session.account_id,
       errors: null,
     });
   } catch (error) {
