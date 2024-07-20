@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model");
+const revModel = require("../models/review-model");
 const utilities = require("../utilities/");
 
 const invCont = {};
@@ -245,7 +246,7 @@ invCont.updateInventory = async function (req, res, next) {
     inv_color,
     classification_id,
   } = req.body;
-  
+
   const updateResult = await invModel.updateInventory(
     inv_id,
     inv_make,
@@ -292,12 +293,12 @@ invCont.updateInventory = async function (req, res, next) {
 /* ***************************
  *  Build Delete View
  * ************************** */
-invCont.buildDelete = async function (req, res, next){
-  const inv_id = parseInt(req.params.inv_id)
-  let nav = await utilities.getNav()
-  const data = await invModel.getVehicleByDetId(inv_id)
+invCont.buildDelete = async function (req, res, next) {
+  const inv_id = parseInt(req.params.inv_id);
+  let nav = await utilities.getNav();
+  const data = await invModel.getVehicleByDetId(inv_id);
   const itemData = data[0];
-  const itemName = `${itemData.inv_make} ${itemData.inv_model}`
+  const itemName = `${itemData.inv_make} ${itemData.inv_model}`;
   res.render("./inventory/delete-confirm", {
     title: "Delete " + itemName,
     nav,
@@ -306,31 +307,226 @@ invCont.buildDelete = async function (req, res, next){
     inv_model: itemData.inv_model,
     inv_year: itemData.inv_year,
     inv_price: itemData.inv_price,
-    errors:null,
-  })
+    errors: null,
+  });
 };
 /* ***************************
  *  Process Delete Inventory
  * ***************************/
-invCont.processDelete = async function (req, res, next){
-  let nav = await utilities.getNav()
-  const {
-    inv_id,
-    inv_make,
-    inv_model,
-    inv_year,
-    inv_price,
-  } = req.body
-  const deleteResult = await invModel.processDelete(inv_id)
-   if(deleteResult) {
+invCont.processDelete = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  const { inv_id, inv_make, inv_model, inv_year, inv_price } = req.body;
+  const deleteResult = await invModel.processDelete(inv_id);
+  if (deleteResult) {
     req.flash(
-      "alert success"
-      `${inv_year} ${inv_make} ${inv_model} successfully deleted.`
-    )
-    res.redirect("/inv/")
-   }else {
-    req.flash("alert error", "Sorry, the vehicle was not deleted.")
-    res.redirect("/inv/delete/" + inv_id)
+      "alert success",`${inv_year} ${inv_make} ${inv_model} successfully deleted.`
+    );
+    res.redirect("/inv/");
+  } else {
+    req.flash("alert error", "Sorry, the vehicle was not deleted.");
+    res.redirect("/inv/delete/" + inv_id);
+  }
+};
+/* ***************************
+ *  Build Review View (is it a rhyme?)
+ * **************************/
+invCont.buildAddReview = async function (req, res, next){
+  try{
+    const nav = await utilities.getNav();
+    const {
+      account_id,
+      inv_id
+    } = req.params
+    //req.body
+    res.render("./inventory/views",{
+      nav,
+      account_id,
+      inv_id, 
+      errors: null
+    })
+  }catch (error) {
+    next(error);
+  }
+} 
+/* ***************************
+ *  Process Add Review (it is not a rhyme)
+ * ************************** */
+invCont.addReview = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  try {
+    //console.log("Entrando a addReview");
+    let nav = await utilities.getNav();
+    const { review_text, account_id, inv_id } = req.body;
+    const review_date = new Date();
+    const review = await revModel.addNewReview(
+      parseInt(account_id),
+      parseInt(inv_id),
+      review_text,
+      review_date
+    );
+    
+    if(review) {
+      req.flash("notice", "Review Added Correctly");
+      const grid = await utilities.buildReview(review);
+      res.status(201).render("./inventory/add-review", {
+        title: "Current Review",
+        nav,
+        grid,
+        errors: null,
+      });
+    } else {
+      req.flash("notice", "Sorry, We can upload your review")
+      res.status(501).render("/", {
+        nav,
+        errors: null,
+      })
+    }
+  } catch (error) {
+    //console.error("Error en addReview:", error);
+    next(error);
+  }
+};
+/* ***************************
+ *  Build Review View (is it a rhyme?)
+ * ***************************/
+invCont.buildReview = async function (req, res, next) {
+  try {
+    const nav = await utilities.getNav();
+    const review_id = parseInt(req.params.review_id, 10);
+    const {
+      account_id,
+      inv_id
+    } = req.params
+    /*if (isNaN(review_id)) {
+      req.flash("error", "Invalid review ID.");
+      return res.status(400).redirect("/");
+    }
+    const data = await revModel.getReviewId(review_id);
+    const grid = await utilities.buildReview(data);*/
+
+    res.render("inventory/add-review", {
+      title: "Current Review",
+      nav,
+      grid,
+      review_id,
+      account_id,
+      inv_id,
+      errors: null,
+    });
+  } catch (error) {
+    next(error);
+  }
+}; 
+/* ***************************
+ *  Build Edit Review View (is it a rhyme? again?)
+ * ***************************/
+invCont.buildEditRev = async function (req, res, next) {
+  try{
+    const nav = await utilities.getNav();
+    const {review_id} = req.params
+    const data = await revModel.getReviewId(review_id)
+    const rev = await invModel.getVehicleByDetId(inv_id)
+    const itemData = rev[0]
+    const itemName = `${itemData.inv_make} ${itemData.inv_model}`;
+    res.render("inventory/edit-review", {
+      title: "Edit Review " + itemName,
+      nav,
+      review_id: data.review_id,
+      review_text: data.review_text,
+      errors: null,
+    })
+  } catch (error){
+    next (error)
   }
 }
+/* ***************************
+ *  Process Edit Review View (is it a rhyme? again?)
+ * ***************************/
+invCont.editReview = async function (req, res, next){
+  try{
+    let nav = await utilities.getNav();
+    const {
+      review_id,
+      review_text
+    } = req.body
+    const review_date = new Date()
+
+    const edit = await revModel.editReview(review_id, review_text, review_date)
+    if (edit) {
+      const allrev = await utilities.allReviews(edit.account_id)
+      
+      const rev = await invModel.getVehicleByDetId(inv_id)
+      const itemData = rev[0]
+      const itemName = `${itemData.inv_make} ${itemData.inv_model}`;
+      req.flash("notice", "Your edition was successfully updated")
+      res.status(201).render("inventory/acc-review", {
+        title: "All My Reviews",
+        nav,
+        account_id: edit.account_id,
+        allrev
+      })
+    } else {
+      req.flash("notice", "Sorry, the edit failed.");
+      res.status(501).render("inventory/edit-review", {
+        title: "Edit Review " + itemName,
+        nav,
+        review_id,
+        review_text,
+        errors: null,
+      })
+    }
+  } catch (error){
+    next (error)
+  }
+}
+/* ***************************
+ *  Build Delete Review View (is it a rhyme? this is pointless)
+ * ***************************/
+invCont.buildDeleteRev = async function (req, res, next) {
+  try {
+    const nav = await utilities.getNav()
+    const review_id = req.params
+    const data = await revModel.getReviewId(review_id)
+    
+    const rev = await utilities.buildReview(data)
+
+    res.render("./inventory/delete-review", {
+      title: "Delete Review",
+      nav,
+      review_id,
+      rev,
+      errors: null,
+    })
+  } catch (error) {
+    next(error);
+  }
+};
+/* ***************************
+ *  Process Delete Review View 
+ *(nothing is working, well actually 
+ * I dont know, cuz add review have some query error)
+ * ***************************/
+invCont.processDelRev = async function (req, res, next) {
+  try {
+    const { review_id, account_id } = req.bdoy;
+    const deleteRev = await revModel.deleteRev(review_id);
+    let nav = await utilities.getNav();
+
+    if (deleteRev) {
+      req.flash("alert success", `The review wassuccessfully deleted.`);
+      res.redirect("/inventory/acc-review");
+    } else {
+      req.flash("alert error", "Sorry, the review was not deleted.");
+      res.status(501).render("/inventory/delete-review", {
+        title: "Delete Review",
+        nav,
+        review_id,
+        account_id,
+        errors: null,
+      });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
 module.exports = invCont;

@@ -54,4 +54,43 @@ router.post("/add-inventory",
     classValidate.checkAddInventoryData,
     utilities.handleErrors(invController.processNewInventory)
 )
+//Final Proyect Reviews
+//ADD REVIEW
+/*router.get(
+    "/add-review", 
+    utilities.checkLogin,
+    utilities.handleErrors(invController.buildAddReview)
+)*/
+router.get(
+  "/add-review/:account_id/:inv_id",
+  utilities.checkLogin,
+  utilities.handleErrors(invController.buildAddReview)
+);
+// Get Review by ID
+router.get("/:review_id", utilities.handleErrors(invController.buildReview));
+//Process to add review
+router.post(
+    "/add-review",
+    utilities.checkLogin,
+    utilities.handleErrors(invController.addReview)
+)
+//Edit Review
+router.get("/edit/:review_id",
+    utilities.checkLogin,
+    utilities.handleErrors(invController.buildEditRev)
+)
+router.post(
+    "/edit-review",
+    utilities.checkLogin,
+    utilities.handleErrors(invController.editReview)
+)
+//Delete Review
+router.get("/delete-review/:review_id",
+    utilities.checkLogin,
+    utilities.handleErrors(invController.buildDeleteRev)
+)
+router.get("/delete-review",
+    utilities.checkLogin,
+    utilities.handleErrors(invController.processDelRev)
+)
 module.exports = router;

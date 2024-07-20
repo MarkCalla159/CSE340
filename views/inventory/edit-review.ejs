@@ -1,0 +1,26 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+} %>
+<%- messages() %>
+<% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+<%  }) %>
+   </ul>
+<% } %>
+
+<div class="addInvent">
+    <form action="/inv/edit-review" method="post">
+        <div class="input-field">
+            <label for="review_text">Review Text:</label>
+            <textarea name="review_text" id="review_text" required><%= locals.review_text %></textarea>
+          </div>
+          <div>
+            <button class="addvehicle">Edit Review</button>
+          </div>
+          <input type="hidden" name="review" <% if(locals.review_id) { %> value="<%= locals.review_id %>" <% } %>>
+    </form>
+</div>

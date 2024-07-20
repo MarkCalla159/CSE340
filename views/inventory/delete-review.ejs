@@ -1,0 +1,37 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+} %>
+<%- messages() %>
+<%- grid %>
+
+<% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+<%  }) %>
+   </ul>
+<% } %>
+
+<div class="addInvent">
+    <p id="deleteconfirm">Confirm Deletion - The delete is permanent.</p>
+    <form action="/inv/delete-review" class="addVeh" method="post">
+        <div class="input-field">
+            <label for="review_text">Review Text:</label>
+            <textarea name="review_text" id="review_text" required readonly><% if(locals.review_id) { %> value="<%= locals.review_id %>"
+                    <% } %></textarea>
+        </div>
+        <div>
+            <button class="addvehicle" type="submit">
+                DELETE REVIEW
+            </button>
+            <input type="hidden" name="review_id" required reandonly <% if(locals.review_id) { %> value="<%=
+                locals.review_id %>"
+                <% } %>>
+                    <input type="hidden" name="account_id" required readonly <% if(locals.review_id) { %> value="<%=
+                        locals.review_id %>"
+                        <% } %>>
+        </div>
+    </form>
+</div>

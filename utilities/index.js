@@ -156,4 +156,66 @@ Util.checkStatus = (req, res, next) => {
     }
   }
 };
- module.exports = Util
+
+/* **************************************
+* Build the Add review view HTML
+* ************************************ */
+Util.buildReview = async function (data, showDet = true){
+  let grid = '';
+  try {
+    let grid = '';
+    //if (!data || !data.inv_id) {
+    //  throw new Error("Invalid review data");
+    //}
+    const vehicleDet = await invModel.getVehicleByDetId(data.inv_id);
+    //if (!vehicleDet || vehicleDet.length === 0) {
+     // throw new Error("No vehicle details found for the given inv_id");
+    //}
+
+    const veh = vehicleDet[0];
+
+    if (data) {
+      grid += '<div id="addedReview">';
+      grid += '<h2>' + veh.inv_make + ' ' + veh.inv_model + " Review" + '</h2>';
+
+      grid += '<div class="detRev">';
+      grid += '<p><strong>Review: </strong>' + data.review_text + '</p>';
+      //grid += '<p><strong>Review Date: </strong>' + data.review_date + '</p>';
+
+      grid += '</div>';
+      if (showDet) {
+        grid += '<a href="/inv/detail/${data.inv_id}" title = "Return to detail inventory">Back to detail view</a>'
+      }
+      grid += '</div>';
+    } else {
+      grid += '<p class="notice">Sorry, we cannot find the review that you are looking for.</p>';
+    }
+    return grid;
+  } catch (error) {
+    grid += '<p class="notice">An error occurred while building the review.</p>';
+  }
+  return grid;
+}
+/* **************************************
+* Build the all review by account ID view HTML
+* ************************************ */
+Util.allReviews = async function (account_id){
+  let rev = await reviewModel.getReviewByAccId(account_id)
+
+  if (rev) {
+    let grid = '<ul id = "accountRev">'
+    data.forEach((rows)=> {
+      grid += '<div class="links">'
+      grid += '<li class="edit-and-delete">'
+      grid += `<a class="link" href="/inventory/edit-review/${rows.review_id}" title="Edit Review">Edit</a>`
+      grid += `<a class="link" href="/inventory/delete-review/${rows.review_id}" title="Delete Review">Edit</a>`
+      grid += '</li>'
+      grid += '</div>'
+    })
+    grid += '</ul>'
+    return grid
+  } else {
+    return '<p>You do not have any review.</p>'
+  }
+}
+module.exports = Util
